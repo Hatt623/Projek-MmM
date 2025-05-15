@@ -23,7 +23,17 @@ class TransaksiObserver
             } 
             
             elseif ($transaksi->tipe_transaksi == 'Pengeluaran') {
-                $dompet->saldo -= $transaksi->jumlah;
+                    $dompet->saldo -= $transaksi->jumlah;
+
+                // if ($dompet->saldo >= $transaksi->jumlah) {
+                //     $dompet->saldo -= $transaksi->jumlah;
+
+                // } else {     
+                //     echo '<script language="javascript">';
+                //     echo 'alert(saldo anda tidak mencukupi)'; 
+                //     echo '</script>';
+                // }
+                
             }
             $dompet->save();
         }
@@ -80,8 +90,19 @@ class TransaksiObserver
             if ($transaksi->tipe_transaksi == 'Pemasukkan') {
                 $dompet->saldo -= $transaksi->jumlah;
                 
-            } elseif ($transaksi->tipe_transaksi == 'Pengeluaran') {
-                $dompet->saldo += $transaksi->jumlah;
+            } 
+            
+            elseif ($transaksi->tipe_transaksi == 'Pengeluaran') {
+                    $dompet->saldo += $transaksi->jumlah;
+
+                // if ($dompet->saldo >= $transaksi->jumlah) {
+                //     $dompet->saldo += $transaksi->jumlah;
+                // } else {     
+                //     echo '<script language="javascript">';
+                //     echo 'alert(Error)'; 
+                //     echo '</script>';
+                // }
+                
             }
             $dompet->save();
         }

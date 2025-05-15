@@ -17,7 +17,7 @@ class AdminsonlyController extends Controller
 
      public function index()
     {
-        $transaksi = Transaksi::all();
+        $transaksi = Transaksi::paginate(5);
 
         $dompet = Dompet::all();
         $totalsaldo = $dompet->sum('saldo');
@@ -28,5 +28,5 @@ class AdminsonlyController extends Controller
         // $totaldompet = $dompet->count(); ilangin dulu aja
         return view('adminonly.index', compact('transaksi','dompet', 'totalsaldo','user','totaluser'));
     }
-    
+
 }

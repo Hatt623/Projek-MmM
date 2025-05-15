@@ -87,14 +87,6 @@
 
                 <hr class="my-8" />
 
-                <p class="mt-4">
-                  @if (Route::has('password.request'))
-                      <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                         href="{{ route('password.request') }}">
-                          {{ __('Forgot Your Password?') }}
-                      </a>
-                  @endif
-                </p>
                 <p class="mt-1">
                   <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                       href="{{ route('register') }}">
@@ -102,6 +94,15 @@
                   </a>
 
                 </p>
+
+                <!-- <p class="mt-4">
+                  @if (Route::has('password.request'))
+                      <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                         href="{{ route('password.request') }}">
+                          {{ __('Forgot Your Password?') }}
+                      </a>
+                  @endif
+                </p> -->
               </div>
             </div>
           </div>

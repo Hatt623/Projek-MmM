@@ -20,7 +20,7 @@ class FrontController extends Controller
     {
         $userid = Auth::id();
 
-        $transaksi = Transaksi::where('user_id', $userid)->get();
+        $transaksi = Transaksi::where('user_id', $userid)->paginate(5);
         $dompet = Dompet::where('user_id', $userid)->get();
 
         $totalsaldo = $dompet->sum('saldo');

@@ -5,6 +5,7 @@
 use App\Http\Controllers\TransaksisController;
 use App\Http\Controllers\DompetsController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ChartsController;
 
 use App\Http\Controllers\AdminsonlyController;
 use App\Http\Middleware\isAdmin;
@@ -32,6 +33,10 @@ Route::resource('/', FrontController::class);
 // Route::resource('kategori', KategorisController::class);
 Route::resource('transaksi', TransaksisController::class);
 Route::resource('dompet', DompetsController::class);
+
+
+Route::get('/chart-data', [ChartsController::class, 'getChartData']);
+
 
 Route::prefix('adminonly')->middleware('auth',isAdmin::class)->group(function() {
     Route::resource('adminonly', AdminsonlyController::class);

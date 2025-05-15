@@ -28,7 +28,7 @@
     <script src="{{ asset ('admin/js/charts-lines.js') }}" defer></script>
 
     <!-- SwiperJS CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 </head>
   <body>
@@ -129,59 +129,67 @@
                 <div
                   class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-8"
                 >
-                <!-- Dompet --> 
-                 @foreach ($dompet as $data)
-                  <div class="card">
-                    <p class="card-title">{{$data->nama_dompet}}</p>
-                    <p class="balance">RP. {{number_format ($data->saldo)}}</p>
-                    <p class="account">
-                      <svg
-                        width="20"
-                        height="20"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        viewBox="0 0 24 24"
-                      >
-                        <rect width="22" height="16" x="1" y="4" rx="2" ry="2"></rect>
-                        <path d="M1 10h22"></path>
-                      </svg>
-                      Account: **** **** **** 1234
-                    </p>
-                    <div class="buttons">
-                      <a href="{{ route('transaksi.create') }}" class="button button-transfer">
-                        <svg
-                          width="16"
-                          height="16"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M7 17l9.2-9.2M17 17V7H7"></path>
-                        </svg>
-                        Transfer
-                      </a>
+                
+                <!-- Dompet -->    
+                  <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                      @foreach ($dompet as $data)
+                      <div class="swiper-slide">
+                        <div class="card m-4">
+                              <p class="card-title">{{$data->nama_dompet}}</p>
+                              <p class="balance">RP. {{number_format ($data->saldo)}}</p>
+                              <p class="account">
+                              <svg
+                                width="20"
+                                height="20"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                              >
+                                <rect width="22" height="16" x="1" y="4" rx="2" ry="2"></rect>
+                                <path d="M1 10h22"></path>
+                              </svg>
+                              Account: **** **** **** 1234
+                            </p>
+                            <div class="buttons">
+                              <a href="{{ route('transaksi.create') }}" class="button button-transfer">
+                                <svg
+                                  width="16"
+                                  height="16"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path d="M7 17l9.2-9.2M17 17V7H7"></path>
+                                </svg>
+                                Transfer
+                              </a>
+                            </div>
+                            <svg
+                              class="dollar-sign"
+                              width="40"
+                              height="40"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                      </div>
+                      @endforeach
                     </div>
-                    <svg
-                      class="dollar-sign"
-                      width="40"
-                      height="40"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
+                  <div class="swiper-pagination mt-4"></div>
                   </div>
-                @endforeach
                 <!-- akhir dompet -->
                     
               </div>
@@ -197,20 +205,6 @@
                 <div
                   class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
                 >
-                  <!-- Chart legend -->
-                  <div class="flex items-center">
-                    <span
-                      class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"
-                    ></span>
-                    <span>Pemasukkan</span>
-                  </div>
-
-                  <div class="flex items-center">
-                    <span
-                      class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
-                    ></span>
-                    <span>Pengeluaran</span>
-                  </div>
 
                 </div>
               </div>
@@ -243,7 +237,11 @@
                   <tbody
                       class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                  @php $no = 1; @endphp 
+                  @php
+                      $no = ($transaksi->currentPage() - 1) * $transaksi->perPage() + 1;
+                      $showing = $transaksi->count();
+                  @endphp
+
                   @foreach ($transaksi as $data)
 
                       <tr class="text-gray-700 dark:text-gray-400">
@@ -279,11 +277,28 @@
                   </tbody>
                   </table>
               </div>
-              <div
-                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
-              >
-
+              <!-- Pagination -->
+                <div
+                  class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+                >
+                  <span class="flex items-center col-span-3">
+                    Memperlihatkan {{$showing}} dari 5 data
+                  </span>
+                  <span class="col-span-2"></span>
+                  <!-- Pagination -->
+                  <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                    <nav aria-label="Table navigation">
+                      <ul class="inline-flex items-center">
+                        <li>
+                            {{ $transaksi->links('pagination::tailwind')}}    
+                        </li>
+                      </ul>
+                    </nav>
+                  </span>
+                </div>
+              <!--akhir Pagination -->
               </div>
+
             </div>
             <!-- Akhir table -->
           </div>
@@ -291,5 +306,17 @@
         </main>
       </div>
     </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+      <script>
+          const swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 25,
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+          });
+      </script> 
   </body>
 </html>

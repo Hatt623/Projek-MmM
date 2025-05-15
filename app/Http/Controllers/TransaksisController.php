@@ -79,9 +79,18 @@ class TransaksisController extends Controller
         $transaksi->user_id                 = Auth::id();
         $transaksi->created_at              = now();
 
+        // if ($request->tipe_transaksi == 'Pengeluaran') {
+        //     $dompet = Dompet::find($request->id_dana);
+        
+        //     if ($dompet->saldo < $request->jumlah) {
+        //         return redirect()->route('transaksi.index')->with('error', 'Saldo tidak mencukupi!');
+        //     }
+        // }
+
         $transaksi->save();
 
         return redirect()->route('transaksi.index')->with('success', 'transaksi created successfully.');
+        
     }
 
     /**

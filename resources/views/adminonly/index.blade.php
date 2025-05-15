@@ -154,14 +154,13 @@
                    
                       <td class="px-4 py-3 text-sm">
                       @foreach($data->dompet as $d)
-                          <p>Rp. {{number_format ($d->saldo) }}</p>
+                          <p>{{ $d->nama_dompet }}</p>
                       @endforeach
-
                       </td> 
 
                       <td class="px-4 py-3 text-sm">
                       @foreach($data->dompet as $d)
-                          <p>{{ $d->nama_dompet }}</p>
+                          <p>Rp. {{number_format ($d->saldo) }}</p>
                       @endforeach
                       </td>  
 
@@ -176,6 +175,26 @@
                   </tbody>
                   </table>
               </div>
+              <!-- Pagination -->
+                <div
+                  class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+                >
+                  <span class="flex items-center col-span-3">
+                    Memperlihatkan 5 per data
+                  </span>
+                  <span class="col-span-2"></span>
+                  <!-- Pagination -->
+                  <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                    <nav aria-label="Table navigation">
+                      <ul class="inline-flex items-center">
+                        <li>
+                            {{ $transaksi->links('pagination::tailwind') }}    
+                        </li>
+                      </ul>
+                    </nav>
+                  </span>
+                </div>
+              <!--akhir Pagination -->
               <div
                 class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
               >
@@ -197,20 +216,6 @@
                 <div
                   class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
                 >
-                  <!-- Chart legend -->
-                  <div class="flex items-center">
-                    <span
-                      class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"
-                    ></span>
-                    <span>Pemasukkan</span>
-                  </div>
-
-                  <div class="flex items-center">
-                    <span
-                      class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
-                    ></span>
-                    <span>Pengeluaran</span>
-                  </div>
 
                 </div>
               </div>

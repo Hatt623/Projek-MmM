@@ -49,11 +49,11 @@ class DompetsController extends Controller
         // Validasi input
         $request->validate([
             'nama_dompet' => 'required|string|max:30',
-            'saldo' => 'required|integer',
+            'saldo' => 'integer',
         ],
         [
             'nama_dompet.required' => 'Nama dompet tidak boleh kosong',
-            'saldo.required' => 'Saldo tidak boleh kosong',
+            
         ]);
         
         $dompet = new Dompet();
@@ -106,11 +106,10 @@ class DompetsController extends Controller
         // Validasi input
         $request->validate([
             'nama_dompet' => 'required|string|max:30',
-            'saldo' => 'required|integer',
+            'saldo' => 'integer',
         ],
         [
             'nama_dompet.required' => 'Nama dompet tidak boleh kosong',
-            'saldo.required' => 'Saldo tidak boleh kosong',
         ]);
         
         $dompet = Dompet::where('id', $id)->where('user_id', Auth::id()) -> firstOrFail();
