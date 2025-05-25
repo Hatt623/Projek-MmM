@@ -26,7 +26,7 @@ class TransaksisController extends Controller
 
     public function index()
     {
-        $transaksi = Transaksi::where('user_id', Auth::id()) -> get();
+        $transaksi = Transaksi::where('user_id', Auth::id()) -> paginate(10);
         return view('transaksi.index', compact('transaksi'));
     }
 

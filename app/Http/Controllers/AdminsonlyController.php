@@ -17,13 +17,13 @@ class AdminsonlyController extends Controller
 
      public function index()
     {
-        $transaksi = Transaksi::paginate(5);
+        $transaksi = Transaksi::get();
 
         $dompet = Dompet::all();
         $totalsaldo = $dompet->sum('saldo');
         $totaldompet = $dompet->count();
 
-        $user = User::with('dompet')->get(); 
+        $user = User::with('dompet')->paginate(5); 
         $totaluser = $user->count();
         // $totaldompet = $dompet->count(); ilangin dulu aja
         return view('adminonly.index', compact('transaksi','dompet', 'totalsaldo','user','totaluser'));

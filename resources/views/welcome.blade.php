@@ -30,6 +30,9 @@
     <!-- SwiperJS CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <script src="{{ asset ('admin/js/search.js') }}" defere></script>
+
+
 </head>
   <body>
     <div
@@ -240,11 +243,13 @@
                   @php
                       $no = ($transaksi->currentPage() - 1) * $transaksi->perPage() + 1;
                       $showing = $transaksi->count();
+                      $totalShowing = $transaksi->total();
+                      $Tno = $transaksi->count() + ($transaksi->currentPage() - 1) * $transaksi->perPage();
                   @endphp
 
                   @foreach ($transaksi as $data)
 
-                      <tr class="text-gray-700 dark:text-gray-400">
+                      <tr class="riwayat-item text-gray-700 dark:text-gray-400">
                       <td class="px-4 py-3" 
                           <div>
                               <p class="font-semibold"> {{ $no++ }} </p>
@@ -274,6 +279,7 @@
                       
                       </tr>
                     @endforeach
+
                   </tbody>
                   </table>
               </div>
@@ -282,7 +288,7 @@
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
                 >
                   <span class="flex items-center col-span-3">
-                    Memperlihatkan {{$showing}} dari 5 data
+                    Memperlihatkan {{$Tno}} dari {{$totalShowing}} data
                   </span>
                   <span class="col-span-2"></span>
                   <!-- Pagination -->
@@ -307,6 +313,7 @@
       </div>
     </div>
 
+    <!-- JAVASCRIPT -->
       <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
       <script>
           const swiper = new Swiper(".mySwiper", {

@@ -23,7 +23,10 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       defer
     ></script>
-    <script src="{{ asset ('admin/js/charts-lines.js') }}" defer></script>
+    <script src="{{ asset ('admin/js/Acharts-lines.js') }}" defer></script>
+
+    <script src="{{ asset ('admin/js/search.js') }}" defere></script>
+
 </head>
   <body>
     <div
@@ -128,18 +131,24 @@
                       >
                       <th class="px-4 py-3">No</th>
                       <th class="px-4 py-3">Nama</th>
-                      <th class="px-4 py-3">Saldo</th>
                       <th class="px-4 py-3">Dompet</th>
+                      <th class="px-4 py-3">Saldo</th>
                       <th class="px-4 py-3">Tanggal Pembuatan Akun</th>
                       </tr>
                   </thead>
                   <tbody
                       class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                  @php $no = 1; @endphp 
+                  @php
+                    $no = ($user->currentPage() - 1) * $user->perPage() + 1;
+                    $showing = $user->count();
+                    $totalShowing = $user->total();
+                    $Tno = $user->count() + ($user->currentPage() - 1) * $user->perPage();
+                  @endphp
+                  
                   @foreach($user as $data)
 
-                      <tr class="text-gray-700 dark:text-gray-400">
+                      <tr class="user-item text-gray-700 dark:text-gray-400">
                     
                       <td class="px-4 py-3" 
                           <div>
@@ -180,7 +189,7 @@
                   class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
                 >
                   <span class="flex items-center col-span-3">
-                    Memperlihatkan 5 per data
+                    Memperlihatkan {{$Tno}} dari {{$totalShowing}} data
                   </span>
                   <span class="col-span-2"></span>
                   <!-- Pagination -->
@@ -188,7 +197,7 @@
                     <nav aria-label="Table navigation">
                       <ul class="inline-flex items-center">
                         <li>
-                            {{ $transaksi->links('pagination::tailwind') }}    
+                            {{ $user->links('pagination::tailwind') }}    
                         </li>
                       </ul>
                     </nav>
@@ -212,7 +221,7 @@
                 <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                   Chart Dompet
                 </h4>
-                <canvas id="line"></canvas>
+                <canvas id="lineAdmin"></canvas>
                 <div
                   class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
                 >

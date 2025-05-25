@@ -23,7 +23,7 @@ class DompetsController extends Controller
 
     public function index()
     {
-        $dompet = Dompet::where('user_id', Auth::id()) -> get();
+        $dompet = Dompet::where('user_id', Auth::id()) -> paginate(5);
         return view('dompet.index', compact('dompet'));
     }
 

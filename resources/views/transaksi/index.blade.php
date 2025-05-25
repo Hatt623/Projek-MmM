@@ -18,6 +18,9 @@
     
     <script src="{{ asset ('admin/js/init-alpine.js') }}"></script>
 
+    <script src="{{ asset ('admin/js/search.js') }}" defere></script>
+
+
 </head>
   <body>
     <div
@@ -105,10 +108,16 @@
                         <tbody
                             class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                         >
-                        @php $no = 1; @endphp 
+                        @php
+                          $no = ($transaksi->currentPage() - 1) * $transaksi->perPage() + 1;
+                          $showing = $transaksi->count();
+                          $totalShowing = $transaksi->total();
+                          $Tno = $transaksi->count() + ($transaksi->currentPage() - 1) * $transaksi->perPage();
+                        @endphp
+
                         @foreach ($transaksi as $data)
 
-                            <tr class="text-gray-700 dark:text-gray-400">
+                            <tr class="transaksi-item text-gray-700 dark:text-gray-400">
                             <td class="px-4 py-3" 
                                 <div>
                                     <p class="font-semibold"> {{ $no++ }} </p>
@@ -216,6 +225,27 @@
                     >
                     </div>
                 </div>
+                 <!-- Pagination -->
+                <div
+                  class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+                >
+                  <span class="flex items-center col-span-3">
+                      Memperlihatkan {{$Tno}} dari {{$totalShowing}} data
+                  </span>
+                  <span class="col-span-2"></span>
+                  <!-- Pagination -->
+                  <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                    <nav aria-label="Table navigation">
+                      <ul class="inline-flex items-center">
+                        <li>
+                            {{ $transaksi->links('pagination::tailwind')}}    
+                        </li>
+                      </ul>
+                    </nav>
+                  </span>
+                </div>
+              <!--akhir Pagination -->
+              
                 <!-- Akhir content -->
 
               </div>
