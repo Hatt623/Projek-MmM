@@ -139,7 +139,7 @@
                     <button  
                     class="px-4 py-2 text-sm font-semibold text-white bg-purple-600 rounded-md shadow hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit" class="btn btn-primary" name="save" >
                       save
-                    </button>|
+                    </button>
             
                 </div>
 
