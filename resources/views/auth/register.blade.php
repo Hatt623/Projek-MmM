@@ -118,19 +118,6 @@
                   />
                 </label>
 
-                <div class="flex mt-6 text-sm">
-                  <label class="flex items-center dark:text-gray-400">
-                    <input
-                      type="checkbox"
-                      class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                    />
-                    <span class="ml-2">
-                      Saya setuju dengan
-                      <span class="underline">kebijakan privasi</span>
-                    </span>
-                  </label>
-                </div>
-
                 <!-- You should use a button here, as the anchor is only used for the example  -->
                 <div class="flex justify-end mb-4 relative z-10">
                     <button  
